@@ -3,12 +3,10 @@ docker kill $(docker ps -q)
 docker rm $(docker ps -a -q) 
 docker run --name nosqlwithcheckname -d nosqlwithcheck 
 docker ps | tee log.log
-docker logs nosqlonename | tee -a log.log
+docker logs nosqlwithcheckname | tee -a log.log
 
 grep log.log -e "27017/tcp" | tee test.log
 grep log.log -e "MongoDB starting" | tee -a test.log
-grep log.log -e "\"address\":\"127.0.0.1\"" | tee -a test.log
-grep log.log -e "{\"bindIp\":\"*\"}}" | tee -a test.log
 
 # and here check
 docker build ./checker --no-cache -t checkerone
