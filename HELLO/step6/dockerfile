@@ -1,0 +1,15 @@
+FROM busybox
+
+RUN mkdir -p /usr/work
+
+WORKDIR /usr/work
+
+COPY /hello1.tar.gz  /tmp/
+RUN tar -zxvf /tmp/hello1.tar.gz -C /usr/work
+RUN rm /tmp/hello1.tar.gz
+
+ADD /hello2.tar.gz /usr/work
+RUN ls -la
+
+RUN cat /usr/work/hello1
+RUN cat /usr/work/hello2
