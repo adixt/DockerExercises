@@ -1,0 +1,3 @@
+FROM busybox
+CMD ["world (this part is from CMD)"]
+ENTRYPOINT [ "echo", "hello (from ENTRYPOINT):" ]
