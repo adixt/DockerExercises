@@ -1,0 +1,10 @@
+FROM mongo:latest
+
+RUN apt-get update
+RUN apt-get install -y netcat
+
+COPY /wait-for-mongo.sh /
+COPY /entrypoint.sh /
+COPY /books.json /
+
+ENTRYPOINT ./entrypoint.sh
