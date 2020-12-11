@@ -1,1 +1,5 @@
 FROM alpine
+RUN touch 1.txt
+RUN echo "greetings from the file" >> 1.txt
+RUN ls -l 1.txt
+ENTRYPOINT ["cat", "1.txt"]
