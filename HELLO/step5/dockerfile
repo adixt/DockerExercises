@@ -1,1 +1,4 @@
 FROM busybox
+COPY /hello /Hello_Name_In_Docker_Filesystem.txt
+RUN cat /Hello_Name_In_Docker_Filesystem.txt
+RUN ls -la Hello_Name_In_Docker_Filesystem.txt
