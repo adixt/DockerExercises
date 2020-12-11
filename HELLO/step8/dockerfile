@@ -1,1 +1,9 @@
 FROM alpine
+
+COPY /entrypoint.sh /
+COPY /hello.txt /
+
+RUN ls -l entrypoint.sh
+RUN ls -l hello.txt
+
+ENTRYPOINT ./entrypoint.sh
