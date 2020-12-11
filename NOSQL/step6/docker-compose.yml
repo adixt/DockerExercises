@@ -1,1 +1,30 @@
 version: '3.8'
+
+services:
+    training-mongo:
+        image: dockerfile-sweet-image:latest
+        build:          
+          dockerfile: dockerfile
+          context: ./
+        ports:
+          - "27017:27017"
+        healthcheck:
+          test: ["CMD", "nc", "-z", "0.0.0.0", "27017"]
+          interval: 10s
+          timeout: 1s
+          retries: 3
+          start_period: 5s
+ 
+    training-mongo2:
+        image: dockerfile-sweet-image:latest
+        build:          
+          dockerfile: dockerfile
+          context: ./
+        ports:
+          - "27018:27017"
+        healthcheck:
+          test: ["CMD", "nc", "-z", "0.0.0.0", "27017"]
+          interval: 10s
+          timeout: 1s
+          retries: 3
+          start_period: 5s
