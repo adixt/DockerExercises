@@ -1,2 +1,2 @@
-FROM busybox
-RUN echo 'greetings'
+FROM <imagename>
+RUN <command>
