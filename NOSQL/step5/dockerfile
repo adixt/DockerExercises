@@ -1,1 +1,13 @@
 FROM mongo:latest
+COPY /mongo.js /
+RUN echo "" | tee -a mongo.js
+RUN echo "db.books.find(" | tee -a mongo.js
+RUN echo "{\"publishedDate\": " | tee -a mongo.js
+RUN echo "{\$gt: ISODate(\"2014-06-10\"), " | tee -a mongo.js
+RUN echo "\$lt: ISODate(\"2014-06-15\")}" | tee -a mongo.js
+RUN echo "}," | tee -a mongo.js
+RUN echo "{\"publishedDate\":1, \"title\":1, \"_id\":0}" | tee -a mongo.js
+RUN echo ")" | tee -a mongo.js
+RUN cat mongo.js
+
+RUN /usr/bin/mongo --host 172.17.0.2 < mongo.js
