@@ -1,4 +1,4 @@
-docker build . --no-cache -t noslqafterbooksimported
+docker build . --progress=plain --no-cache -t noslqafterbooksimported
 docker kill $(docker ps -q)
 docker rm $(docker ps -a -q) 
 docker run --name noslqafterbooksimportedname -d noslqafterbooksimported 
@@ -11,10 +11,10 @@ grep log.log -e "inside entrypoint.sh" | tee -a test.log
 grep log.log -e "Mongo server is avaiable at (172.17.0.2:27017)" | tee -a test.log
 
 # and here check
-docker build ./checker --no-cache | tee checkerlog.log
+docker build ./checker --progress=plain --no-cache | tee checkerlog.log
 grep checkerlog.log -e "Ember.js in Action" | tee -a test.log
 
-clear
+#clear ---> There is no easy way to retrieve build logs in the current Docker version. As a result, TEE is getting an empty input from the pipe.
 out=$(cat test.log | wc -l)
 if [ "$out" != "4" ]; then
     echo "Expected '4', but your result is '$out'"

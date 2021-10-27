@@ -1,4 +1,4 @@
-docker build . --no-cache -t nosqlcheckercreationep
+docker build . --progress=plain --no-cache -t nosqlcheckercreationep
 docker kill $(docker ps -q)
 docker rm $(docker ps -a -q) 
 docker run --name nosqlcheckercreationepname -d nosqlcheckercreationep 
@@ -10,7 +10,7 @@ grep log.log -e "27017/tcp" | tee test.log
 grep log.log -e "MongoDB starting" | tee -a test.log
 
 grep log.log -e "Mongo server is avaiable at (0.0.0.0:27017)" | tee -a test.log
-clear
+#clear ---> There is no easy way to retrieve build logs in the current Docker version. As a result, TEE is getting an empty input from the pipe.
 out=$(cat test.log | wc -l)
 if [ "$out" != "3" ]; then
     echo "Expected '3', but your result is '$out'"
